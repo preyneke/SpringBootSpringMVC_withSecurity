@@ -6,7 +6,7 @@ import com.thymeleaf.demo.Repositories.RoleRepository;
 import com.thymeleaf.demo.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.beans.factory.annotation.Qualifier;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,18 +16,19 @@ import java.util.HashSet;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
+@Autowired
+private UserRepository userRepository;
 
-    @Qualifier("userRepository")
-    @Autowired
-    private UserRepository userRepository;
-    @Qualifier("roleRepository")
-    @Autowired
-    private RoleRepository roleRepository;
+@Autowired
+private RoleRepository roleRepository;
+
+
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public User findUserByEmail(String email) {
+    public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 

@@ -4,6 +4,6 @@ import com.thymeleaf.demo.Model.User;
 
 public interface UserService {
 
-    public User findUserByEmail(String email);
+    public User findByEmail(String email);
     public void saveUser(User user);
 }

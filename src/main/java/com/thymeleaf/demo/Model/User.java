@@ -21,7 +21,7 @@ public class User {
     @Column(name = "password")
     @Length(min = 5, message = "*Your password must have at least 5 characters")
     @NotEmpty(message = "*please provide a password")
-    @Transient
+    //@Transient
     private String password;
     @Column(name="name")
     @NotEmpty(message = "*Please enter your name")
@@ -32,7 +32,7 @@ public class User {
     @Column(name = "active")
     private int active;
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_role"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
     public int getId() {

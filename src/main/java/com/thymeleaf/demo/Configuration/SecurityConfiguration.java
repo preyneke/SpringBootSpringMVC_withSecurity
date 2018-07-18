@@ -24,37 +24,34 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
-    @Value("${spring.queries.users-query}")
-    private String usersQuery;
 
-    @Value("${spring.queries.roles-query}")
-    private String rolesQuery;
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-        auth.jdbcAuthentication().usersByUsernameQuery(usersQuery)
-                .authoritiesByUsernameQuery(rolesQuery)
-                .dataSource(dataSource)
-                .passwordEncoder(bCryptPasswordEncoder);
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
+        auth.jdbcAuthentication().dataSource(dataSource)
+                .usersByUsernameQuery("select email, password, active"
+                        + " from user where email=?")
+                .authoritiesByUsernameQuery("select u.email, r.role from user u inner join user_role " +
+                        "ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.email=?")
+                .passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/registration").permitAll()
+                .antMatchers("/", "/login", "/registration","/h2-console/**").permitAll()
                 .antMatchers("/admin/**").hasAnyAuthority("ADMIN").anyRequest()
                 .authenticated().and().csrf().disable().formLogin()
                 .loginPage("/login").failureUrl("/login?error=true")
-                .defaultSuccessUrl("/admin/home")
+                .defaultSuccessUrl("/admin/home", true)
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/").and().exceptionHandling()
                 .accessDeniedPage("/access-denied");
+        http.headers().frameOptions().sameOrigin();
 
     }
 
@@ -62,6 +59,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception{
         web
                 .ignoring()
-                .antMatchers("/resources/**","/static/**", "/css/**", "/js/**", "/images/**");
+                .antMatchers("/resources/**","/static/**", "/css/**", "/js/**", "/images/**","/h2-console");
     }
 }
