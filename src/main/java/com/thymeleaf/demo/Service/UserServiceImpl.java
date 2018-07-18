@@ -5,6 +5,8 @@ import com.thymeleaf.demo.Model.User;
 import com.thymeleaf.demo.Repositories.RoleRepository;
 import com.thymeleaf.demo.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +17,10 @@ import java.util.HashSet;
 public class UserServiceImpl implements UserService {
 
 
+    @Qualifier("userRepository")
     @Autowired
     private UserRepository userRepository;
+    @Qualifier("roleRepository")
     @Autowired
     private RoleRepository roleRepository;
     @Autowired
