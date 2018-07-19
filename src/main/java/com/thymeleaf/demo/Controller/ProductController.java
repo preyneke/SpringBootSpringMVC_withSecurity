@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 import java.util.List;
 
+// spring boot based web store
 @Controller
 public class ProductController {
 
