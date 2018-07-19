@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:th="http://www.thymeleaf.org">
+xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <title>Spring Boot Site</title>
@@ -21,10 +22,9 @@ xmlns:th="http://www.thymeleaf.org">
             <ul class="nav nav-pills pull-right">
                 <li><a th:href="@{/market/products}">Home</a>
                 <li><a th:href="@{/market/products}">Products</a>
-                <li><a href="">Add Product</a>
-                <li><a href="">Cart</a>
-                <li><a href="">Add Customer</a>
+
             </ul>
+
             <h3 class="text-muted">Web Store</h3>
         </div>
 
