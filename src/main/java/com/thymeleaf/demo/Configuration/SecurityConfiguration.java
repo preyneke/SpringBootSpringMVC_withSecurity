@@ -40,11 +40,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
-                .antMatchers("/", "/login", "/registration","/h2-console/**").permitAll()
+                .antMatchers("/", "/login", "/registration","/h2-console/**", "/market/**").permitAll()
                 .antMatchers("/admin/**").hasAnyAuthority("ADMIN").anyRequest()
                 .authenticated().and().csrf().disable().formLogin()
                 .loginPage("/login").failureUrl("/login?error=true")
-                .defaultSuccessUrl("/admin/home", true)
+                .defaultSuccessUrl("/market/products", true)
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and().logout()

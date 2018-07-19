@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Spring Boot Site</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
+    <link rel="stylesheet"
+          href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+
+<body>
+<div class="container">
+    <div class="jumbotron">
+        <div class="header">
+            <ul class="nav nav-pills pull-right">
+                <li><a th:href="@{/market/products}">Home</a>
+                <li><a th:href="@{/market/products}">Products</a>
+                <li><a href="">Add Product</a>
+                <li><a href="">Cart</a>
+                <li><a href="">Add Customer</a>
+            </ul>
+            <h3 class="text-muted">Web Store</h3>
+        </div>
+
+        <h1>
+            Products
+        </h1>
+        <p>
+            All our Products in one place!
+        </p>
+
+    </div>
+    <section class="container"  >
+        <div class="row">
+            <product th:each="p: ${product}">
+                <div class="col-md-5">
+                    <img th:src="@{${'/images/'+'P'+ p.id +'.png'}}"
+                         alt="image" style="width: 100%" />
+                </div>
+                <div class="col-md-5">
+                    <h3 th:text="${p.name}" >Product Name</h3>
+                    <p th:text="${p.description}">Product description</p>
+
+                    <p th:text="${p.manufacturer}"><strong >manufacturer</strong></p>
+
+
+                    <p th:text="${p.category}"><strong>category</strong></p>
+                    <p th:text="${'Available'+ p.unitStock +'units in stock'}"><strong>Units in stock</strong></p>
+
+
+
+
+
+                    <h4 th:text="${'R'+ p.unitPrice}">Price</h4>
+
+                    <a th:href="@{/market/products}"
+                    class="btn btn-default"> <span class="glyphicon-hand-left glyphicon"></span> back
+                    </a>
+
+
+
+                </div>
+            </product>
+        </div>
+    </section>
+
+
+</div>
+
+
+</body>
+
+
+
+
+</html>
