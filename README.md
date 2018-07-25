@@ -21,9 +21,9 @@ Full Tech Stach
                                                                                              with validation)
 v 0.0.1 Includes
 
-User reggistration and login (only one role - ADMIN)
-User Table with one to many relationship with User Roles table
-Product table with sql script loading 3 products on start up
-JPA mapping
-Hibernate anotation based validation
-Thymeleaf view pages
+//User reggistration and login (only one role - ADMIN)
+//User Table with one to many relationship with User Roles table
+//Product table with sql script loading 3 products on start up
+//JPA mapping
+//Hibernate anotation based validation
+//Thymeleaf view pages
